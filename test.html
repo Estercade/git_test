@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Form validation: Task 3</title>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 1em;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      #emailError {
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form novalidate>
+      <label for="mail">I would like you to provide me with an e-mail address:</label>
+      <input type="email" id="mail" name="mail" minlength="10" pattern="[0-9a-zA-Z]?@[0-9a-zA-Z]?" required />
+      <button class="submit">Submit</button>
+      <span id="emailError"></span>
+    </form>
+  </body>
+  <script>
+    const email = document.getElementById("mail");
+    const submit = document.querySelector(".submit");
+    const emailError = document.getElementById("emailError");
+
+    email.addEventListener("input", (e) => {
+      console.log(email.validity);
+      if (email.validity.typeMismatch) {
+        emailError.textContent = "Please enter a valid email address.";
+      } else if (email.validity.tooShort) {
+        emailError.textContent = "Email address is too short.";
+      }
+      else {
+        emailError.textContent = "";
+        return;
+      }
+    })
+
+  </script>
+
+</html>
